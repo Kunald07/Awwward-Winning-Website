@@ -1,6 +1,6 @@
 import React from 'react'
 import { TiLocationArrow } from 'react-icons/ti'
-const BentoCard = ({ src, title, description, isComingSoon}) => {
+const BentoCard = ({ src, title, description}) => {
     return (
         <div className='relative size-full'>
             <video 

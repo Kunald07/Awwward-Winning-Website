@@ -62,7 +62,7 @@ const Navbar = () => {
       <header className="absolute top-1/2 w-full -translate-y-1/2">
       <nav className='flex size-full items-center justify-between p-4'>
         <div className='flex items-center gap-7'>
-          <img src="https://i.pinimg.com/originals/a4/bd/7e/a4bd7e6ebf569917f6805170cce05d35.gif" alt="logoImage" className="w-10" />
+          <img src="https://3dgaming-lac.vercel.app/img/logo.png" alt="logoImage" className="w-10" />
 
           <Button 
           id="product-button"
