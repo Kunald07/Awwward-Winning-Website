@@ -1,22 +1,45 @@
 @import "tailwindcss";
 
- body {
-  font-family: "general", sans-serif;
-  width: 100dvw;
-  background-color: #dfdff0;
-  overflow-x: hidden;
+@import "tailwindcss";
+
+/* =========================================
+   GLOBAL STYLES
+========================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background-color: #dfdff0;
+  color: #111827;
+  font-family: "general", sans-serif;
+}
+
+body {
+  position: relative;
+}
+
+/* =========================================
+   FONTS
+========================================= */
 
 @layer base {
   @font-face {
-    font-family: "general";
-    src: url("/fonts/general.woff2") format("woff2");
+    font-family: "circular-web";
+    src: url("/fonts/circularweb-book.woff2") format("woff2");
   }
 
   @font-face {
-    font-family: "circular-web";
-    src: url("/fonts/circularweb-book.woff2") format("woff2");
+    font-family: "general";
+    src: url("/fonts/general.woff2") format("woff2");
   }
 
   @font-face {
@@ -30,7 +53,202 @@
   }
 
   @font-face {
-    font-family: "zentry-regular";
+    font-family: "zentry";
     src: url("/fonts/zentry-regular.woff2") format("woff2");
+  }
+}
+
+/* =========================================
+   UTILITIES
+========================================= */
+
+@layer utilities {
+
+  /* Layout */
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .absolute-center {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  .border-hsla {
+    @apply border border-white/20;
+  }
+
+  /* =========================================
+     NAVBAR
+  ========================================= */
+
+  .floating-nav {
+    @apply rounded-2xl border border-white/10 bg-black/50 backdrop-blur-md;
+  }
+
+  .nav-hover-btn {
+    @apply relative ml-10 cursor-pointer text-xs uppercase tracking-[0.2em] text-blue-50 transition-all duration-300;
+    font-family: "general", sans-serif;
+  }
+
+  .nav-hover-btn::after {
+    content: "";
+    @apply absolute left-0 -bottom-1 h-[2px] w-full origin-right scale-x-0 bg-white transition-transform duration-300 ease-in-out;
+  }
+
+  .nav-hover-btn:hover::after {
+    @apply origin-left scale-x-100;
+  }
+
+  /* =========================================
+     HERO / ABOUT
+  ========================================= */
+
+  .mask-clip-path {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .special-font b {
+    font-family: "zentry", sans-serif;
+    font-feature-settings: "ss01" on;
+  }
+
+  .animated-title {
+    @apply flex flex-col gap-2 text-center uppercase leading-[0.85] text-black;
+    font-family: "zentry", sans-serif;
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-weight: 900;
+  }
+
+  .animated-word {
+    @apply inline-block opacity-0;
+    transform: translate3d(20px, 50px, -60px)
+      rotateY(60deg)
+      rotateX(-40deg);
+
+    transform-origin: 50% 50% -150px !important;
+    will-change: transform, opacity;
+  }
+
+  .about-subtext {
+    @apply mt-6 max-w-2xl text-center leading-relaxed text-gray-600;
+    font-family: "circular-web", sans-serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  }
+
+  .about-image {
+    @apply relative left-1/2 top-0 h-[60vh] w-[90vw] max-w-6xl -translate-x-1/2 overflow-hidden rounded-3xl md:h-[80vh];
+  }
+
+  /* =========================================
+     FEATURES
+  ========================================= */
+
+  .bento-title {
+    @apply uppercase leading-none text-white;
+    font-family: "zentry", sans-serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 900;
+  }
+
+  .bento-tilt_1 {
+    @apply relative col-span-2 overflow-hidden rounded-3xl border border-white/10 bg-black/30 transition-all duration-300 ease-out md:col-span-1;
+  }
+
+  .bento-tilt_1:hover {
+    transform: translateY(-8px) rotate(1deg);
+  }
+
+  .bento-tilt_2 {
+    @apply relative col-span-1 overflow-hidden rounded-3xl border border-white/10 transition-all duration-300 ease-out;
+  }
+
+  .bento-tilt_2:hover {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+
+  /* =========================================
+     BUTTONS
+  ========================================= */
+
+  .btn-primary {
+    @apply rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-wider text-black transition-all duration-300 hover:scale-105;
+  }
+}
+
+/* =========================================
+   AUDIO INDICATOR
+========================================= */
+
+.indicator-line {
+  width: 3px;
+  height: 10px;
+  border-radius: 9999px;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.indicator-line.active {
+  animation: sound-wave 0.6s ease infinite;
+}
+
+@keyframes sound-wave {
+  0% {
+    height: 8px;
+    transform: translateY(0px);
+  }
+
+  50% {
+    height: 22px;
+    transform: translateY(-4px);
+  }
+
+  100% {
+    height: 8px;
+    transform: translateY(0px);
+  }
+}
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .animated-title {
+    line-height: 0.95;
+  }
+
+  .about-subtext {
+    @apply px-5;
+  }
+
+  .about-image {
+    @apply h-[50vh];
+  }
+
+  .nav-hover-btn {
+    @apply ml-5;
   }
 }
